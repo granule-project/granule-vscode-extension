@@ -2,7 +2,7 @@
 
 ## Commands
 
-- `Ctrl-g Ctrl-r`: attempts to rewrite all non-empty holes in the hole, by
+- `Ctrl-g Ctrl-r`: attempts to rewrite all non-empty holes in the file, by
   case-splitting on the variables they contain
 - `Ctrl-g Ctrl-h`: attempts to rewrite the non-empty hole under the cursor (if
   there is one)
