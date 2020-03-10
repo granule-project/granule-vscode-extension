@@ -9,7 +9,7 @@
 - `Ctrl-g Ctrl-u`: converts ASCII characters to their Unicode equivalents
 - `Ctrl-g Ctrl-a`: converts Unicode characters to their ASCII equivalents
 
-The standard undo functionality should work with any of the above commands.
+These commands will automatically save any unsaved changes before running, they are also compatible with the standard undo functionality.
 
 ## How to install
 
