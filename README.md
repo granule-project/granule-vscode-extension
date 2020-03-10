@@ -19,7 +19,7 @@ yarn package
 code --install-extension ./granule-0.0.1.vsix
 ```
 
-> Requires `[yarn](https://classic.yarnpkg.com/lang/en/)` and [VSCode](https://code.visualstudio.com/) to be installed
+> Requires [`yarn`](https://classic.yarnpkg.com/lang/en/) and [VSCode](https://code.visualstudio.com/) to be installed
 
 Alternatively, run the first two commands, then add the `.vsix` file to VSCode
 by going to *Extensions*, clicking *...* in the top-right, then *Install from
