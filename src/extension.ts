@@ -53,12 +53,8 @@ export function deactivate() { }
 function granuleCommandRunner(outputChannel: vscode.OutputChannel, ...args: string[]): () => void {
   return () => {
     const currentDocument = vscode.window.activeTextEditor?.document;
-    if (!currentDocument || currentDocument.isUntitled || currentDocument.isDirty) {
-      vscode.window.showWarningMessage("Please save the file first.");
-    } else if (!currentDocument.fileName.endsWith(".gr")) {
-      vscode.window.showErrorMessage("Command only supported on .gr files.");
-    } else {
-      const filename = currentDocument.fileName;
+
+    const execCommand = (filename : string) => {
       const dirname = path.dirname(filename);
       const basename = path.basename(filename);
       const command = args.join(" ");
@@ -76,6 +72,18 @@ function granuleCommandRunner(outputChannel: vscode.OutputChannel, ...args: stri
           outputChannel.append(stderr);
         }
       });
+    }
+
+    if (!currentDocument || currentDocument.isUntitled) {
+      vscode.window.showWarningMessage("Please save the file first.");
+    } else if (!currentDocument.fileName.endsWith(".gr")) {
+      vscode.window.showErrorMessage("Command only supported on .gr files.");
+    } else {
+      if (currentDocument.isDirty) {
+        currentDocument.save().then(() => execCommand(currentDocument.fileName));
+      } else {
+        Promise.resolve().then(() => execCommand(currentDocument.fileName));
+      }
     }
   };
 }
