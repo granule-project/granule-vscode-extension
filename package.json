@@ -1,0 +1,83 @@
+{
+  "name": "granule",
+  "displayName": "Granule",
+  "description": "Runs certain commands for .gr files.",
+  "publisher": "Granule",
+  "repository": {},
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.41.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:granule.rewriteHoles",
+    "onCommand:granule.rewriteHole",
+    "onCommand:granule.asciiToUnicode",
+    "onCommand:granule.unicodeToAscii"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "granule.rewriteHoles",
+        "title": "Rewrite holes"
+      },
+      {
+        "command": "granule.rewriteHole",
+        "title": "Rewrite hole under cursor"
+      },
+      {
+        "command": "granule.asciiToUnicode",
+        "title": "ASCII to Unicode"
+      },
+      {
+        "command": "granule.unicodeToAscii",
+        "title": "Unicode to ASCII"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "granule.rewriteHoles",
+        "key": "ctrl+g ctrl+r",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "granule.rewriteHole",
+        "key": "ctrl+g ctrl+h",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "granule.asciiToUnicode",
+        "key": "ctrl+g ctrl+u",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "granule.unicodeToAscii",
+        "key": "ctrl+g ctrl+a",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run compile",
+    "package": "vsce package",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "yarn run compile",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.1",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.11.7",
+    "@types/vscode": "^1.41.0",
+    "glob": "^7.1.5",
+    "mocha": "^6.2.2",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.4",
+    "vsce": "^1.71.0",
+    "vscode-test": "^1.2.2"
+  }
+}
