@@ -30,6 +30,27 @@ export function activate(context: vscode.ExtensionContext) {
     }
   );
 
+  const rewriteHoleSynth = vscode.commands.registerCommand(
+    "granule.rewriteHoleSynth",
+    () => {
+      const editor = vscode.window.activeTextEditor;
+      if (editor && editor.selection.isEmpty) {
+        const { character, line } = editor.selection.active;
+        granuleCommandRunner(
+          outputChannel,
+	  "--synthesise",
+          "--rewrite-holes",
+          "--hole-line",
+          (line + 1).toString(),
+          "--hole-column",
+          (character + 1).toString()
+        )();
+      } else {
+        vscode.window.showWarningMessage("Could not retrieve position under cursor.");
+      }
+    }
+  );
+
   const asciiToUnicode = vscode.commands.registerCommand(
     "granule.asciiToUnicode",
     granuleCommandRunner(outputChannel, "--ascii-to-unicode")
@@ -42,6 +63,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   context.subscriptions.push(
     rewriteHoles,
+    rewriteHoleSynth,
     rewriteHole,
     asciiToUnicode,
     unicodeToAscii

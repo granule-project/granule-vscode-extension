@@ -4,7 +4,7 @@
   "description": "Runs certain commands for .gr files.",
   "publisher": "Granule",
   "repository": {},
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.41.0"
   },
@@ -14,6 +14,7 @@
   "activationEvents": [
     "onCommand:granule.rewriteHoles",
     "onCommand:granule.rewriteHole",
+    "onCommand:granule.rewriteHoleSynth",
     "onCommand:granule.asciiToUnicode",
     "onCommand:granule.unicodeToAscii"
   ],
@@ -40,22 +41,27 @@
     "keybindings": [
       {
         "command": "granule.rewriteHoles",
-        "key": "ctrl+g ctrl+r",
+        "key": "ctrl+s ctrl+r",
         "when": "editorTextFocus"
       },
       {
         "command": "granule.rewriteHole",
-        "key": "ctrl+g ctrl+h",
+        "key": "ctrl+s ctrl+h",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "granule.rewriteHoleSynth",
+        "key": "ctrl+s ctrl+s",
         "when": "editorTextFocus"
       },
       {
         "command": "granule.asciiToUnicode",
-        "key": "ctrl+g ctrl+u",
+        "key": "ctrl+s ctrl+u",
         "when": "editorTextFocus"
       },
       {
         "command": "granule.unicodeToAscii",
-        "key": "ctrl+g ctrl+a",
+        "key": "ctrl+s ctrl+a",
         "when": "editorTextFocus"
       }
     ]
