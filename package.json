@@ -41,27 +41,27 @@
     "keybindings": [
       {
         "command": "granule.rewriteHoles",
-        "key": "ctrl+s ctrl+r",
+        "key": "ctrl+e ctrl+r",
         "when": "editorTextFocus"
       },
       {
         "command": "granule.rewriteHole",
-        "key": "ctrl+s ctrl+h",
+        "key": "ctrl+e ctrl+h",
         "when": "editorTextFocus"
       },
       {
         "command": "granule.rewriteHoleSynth",
-        "key": "ctrl+s ctrl+s",
+        "key": "ctrl+e ctrl+e",
         "when": "editorTextFocus"
       },
       {
         "command": "granule.asciiToUnicode",
-        "key": "ctrl+s ctrl+u",
+        "key": "ctrl+e ctrl+u",
         "when": "editorTextFocus"
       },
       {
         "command": "granule.unicodeToAscii",
-        "key": "ctrl+s ctrl+a",
+        "key": "ctrl+e ctrl+a",
         "when": "editorTextFocus"
       }
     ]
