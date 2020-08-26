@@ -2,12 +2,14 @@
 
 ## Commands
 
-- `Ctrl-g Ctrl-r`: attempts to rewrite all non-empty holes in the file, by
+- `Ctrl-e Ctrl-e`: attempts to synthesis a goal at the cursor (main operation)
+
+- `Ctrl-e Ctrl-r`: attempts to rewrite all non-empty holes in the file, by
   case-splitting on the variables they contain
-- `Ctrl-g Ctrl-h`: attempts to rewrite the non-empty hole under the cursor (if
+- `Ctrl-e Ctrl-h`: attempts to rewrite the non-empty hole under the cursor (if
   there is one)
-- `Ctrl-g Ctrl-u`: converts ASCII characters to their Unicode equivalents
-- `Ctrl-g Ctrl-a`: converts Unicode characters to their ASCII equivalents
+- `Ctrl-e Ctrl-u`: converts ASCII characters to their Unicode equivalents
+- `Ctrl-e Ctrl-a`: converts Unicode characters to their ASCII equivalents
 
 These commands will automatically save any unsaved changes before running, they are also compatible with the standard undo functionality.
 
