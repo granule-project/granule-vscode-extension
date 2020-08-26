@@ -27,7 +27,7 @@ After following these steps, the newly compiled code can be tested by opening th
 After following the above steps to compile the code, you can produce a packaged `.vsix` file containing the extension using `yarn package`. This can then be installed locally with the following command:
 
 ```bash
-code --install-extension ./granule-0.0.1.vsix
+code --install-extension ./granule-0.0.2.vsix
 ```
 
 Alternatively, run the `package` command, then add the `.vsix` file to VS Code
