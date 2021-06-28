@@ -27,6 +27,7 @@
           "Granule",
           "granule"
         ],
+        "configuration": "./granule-language-configuration.json",
         "extensions": [
           ".gr"
         ]
