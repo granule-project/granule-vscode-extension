@@ -1,10 +1,14 @@
 {
   "name": "granule",
   "displayName": "Granule",
-  "description": "Runs certain commands for .gr files.",
+  "description": "Adds support for the Granule language, including syntax highlighting, snippets, language configuration and various commands.",
   "publisher": "Granule",
-  "repository": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/granule-project/granule-vscode-extension"
+  },
   "version": "0.0.2",
+  "icon": "images/gr-blue.png",
   "engines": {
     "vscode": "^1.41.0"
   },
