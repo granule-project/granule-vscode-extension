@@ -54,6 +54,10 @@
         "title": "Rewrite hole under cursor"
       },
       {
+        "command": "granule.rewriteHoleSynth",
+        "title": "Synthesise hole"
+      },
+      {
         "command": "granule.asciiToUnicode",
         "title": "ASCII to Unicode"
       },
