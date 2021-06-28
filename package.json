@@ -83,6 +83,12 @@
         "key": "ctrl+e ctrl+a",
         "when": "editorTextFocus"
       }
+    ],
+    "snippets": [
+      {
+        "language": "granule",
+        "path": "./granule-snippets.json"
+      }
     ]
   },
   "scripts": {
