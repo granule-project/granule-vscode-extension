@@ -20,6 +20,25 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "languages": [
+      {
+        "id": "granule",
+        "aliases": [
+          "Granule",
+          "granule"
+        ],
+        "extensions": [
+          ".gr"
+        ]
+      }
+    ],
+    "grammars": [
+      {
+        "language": "granule",
+        "scopeName": "source.gr",
+        "path": "syntaxes/granule.tmLanguage.json"
+      }
+    ],
     "commands": [
       {
         "command": "granule.rewriteHoles",
