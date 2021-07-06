@@ -1,15 +1,19 @@
 {
   "name": "granule",
   "displayName": "Granule",
-  "description": "Runs certain commands for .gr files.",
+  "description": "Adds support for the Granule language, including syntax highlighting, snippets, language configuration and various commands.",
   "publisher": "Granule",
-  "repository": {},
-  "version": "0.0.2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/granule-project/granule-vscode-extension"
+  },
+  "version": "0.1.0",
+  "icon": "images/gr-blue.png",
   "engines": {
     "vscode": "^1.41.0"
   },
   "categories": [
-    "Other"
+    "Programming Languages", "Snippets"
   ],
   "activationEvents": [
     "onCommand:granule.rewriteHoles",
@@ -20,6 +24,26 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "languages": [
+      {
+        "id": "granule",
+        "aliases": [
+          "Granule",
+          "granule"
+        ],
+        "configuration": "./granule-language-configuration.json",
+        "extensions": [
+          ".gr"
+        ]
+      }
+    ],
+    "grammars": [
+      {
+        "language": "granule",
+        "scopeName": "source.gr",
+        "path": "syntaxes/granule.tmLanguage.json"
+      }
+    ],
     "commands": [
       {
         "command": "granule.rewriteHoles",
@@ -28,6 +52,10 @@
       {
         "command": "granule.rewriteHole",
         "title": "Rewrite hole under cursor"
+      },
+      {
+        "command": "granule.rewriteHoleSynth",
+        "title": "Synthesise hole"
       },
       {
         "command": "granule.asciiToUnicode",
@@ -63,6 +91,12 @@
         "command": "granule.unicodeToAscii",
         "key": "ctrl+e ctrl+a",
         "when": "editorTextFocus"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "granule",
+        "path": "./granule-snippets.json"
       }
     ]
   },

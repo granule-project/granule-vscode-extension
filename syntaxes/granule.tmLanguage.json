@@ -1,0 +1,328 @@
+{
+  "name": "Granule",
+  "scopeName": "source.gr",
+  "fileTypes": ["gr"],
+  "comment": "Based heavily on the Idris syntax from https://github.com/meraymond2/idris-vscode",
+  "patterns": [
+    {
+      "name": "keyword.control.granule",
+      "match": "\\b(if|then|else|do|let|in|where)\\b"
+    },
+    {
+      "name": "storage.declaration.granule",
+      "match": "\\b(case|of|try|as|catch)\\b"
+    },
+    {
+      "name": "storage.visibility.granule",
+      "match": "\\b(hiding)\\b"
+    },
+    {
+      "name": "comment.line.granule",
+      "match": "(--).*$\n?",
+      "comment": "Line comment"
+    },
+    {
+      "begin": "\\b(module)\\b",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.granule"
+        }
+      },
+      "end": "($|;|(?=--))",
+      "name": "meta.module.granule",
+      "patterns": [
+        {
+          "match": "([a-zA-Z0-9._']+)",
+          "name": "meta.declaration.module.granule"
+        }
+      ]
+    },
+    {
+      "begin": "\\b(import\\s+public|import)\\b",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.other.granule"
+        }
+      },
+      "end": "($|;|(?=--))",
+      "name": "meta.import.granule",
+      "patterns": [
+        {
+          "match": "([a-zA-Z0-9._']+)",
+          "name": "support.other.module.granule"
+        }
+      ]
+    },
+    {
+      "begin": "\\b(language)\\b",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.other.granule"
+        }
+      },
+      "end": "($|;|(?=--))",
+      "name": "meta.language.granule",
+      "patterns": [
+        {
+          "match": "([a-zA-Z0-9._']+)",
+          "name": "support.other.extension.granule"
+        }
+      ]
+    },
+    { "include": "#param_decl" },
+    { "include": "#data_decl" },
+    { "include": "#function_signature" },
+    { "include": "#ty_expression" }
+  ],
+  "repository": {
+    "param_decl": {
+      "name": "meta.declaration.data.granule",
+      "begin": "\\b(parameters)\\s+(\\()",
+      "end": "(\\))$",
+      "beginCaptures": {
+        "1": { "name": "keyword.other.granule" },
+        "2": { "name": "punctuation.context.begin.granule" }
+      },
+      "endCaptures": { "1": { "name": "punctuation.context.end.granule" } },
+      "patterns": [{ "include": "#ty_expression" }]
+    },
+    "parameter_type": {
+      "comment": "Parameter types in a type signature",
+      "patterns": [
+        {
+          "name": "meta.parameter.implicit.granule",
+          "comment": "{x : Nat}",
+          "begin": "((\\{)([\\w'\\s]+)\\s*(:)(?!:),?)+",
+          "beginCaptures": {
+            "2": { "name": "punctuation.delimiter.granule" },
+            "3": { "name": "variable.parameter.granule" },
+            "4": { "name": "keyword.operator.annot.granule" }
+          },
+          "end": "\\}",
+          "endCaptures": {
+            "0": { "name": "punctuation.delimiter.granule" }
+          },
+          "patterns": [{ "include": "#ty_expression" }]
+        },
+        {
+          "name": "meta.parameter.named.granule",
+          "comment": "(x : Nat)",
+          "begin": "((\\()([\\w'\\s]+)\\s*(:)(?!:),?)+",
+          "beginCaptures": {
+            "2": { "name": "punctuation.delimiter.granule" },
+            "3": { "name": "variable.parameter.granule" },
+            "4": { "name": "keyword.operator.annot.granule" }
+          },
+          "end": "\\)",
+          "endCaptures": {
+            "0": { "name": "punctuation.delimiter.granule" }
+          },
+          "patterns": [{ "include": "#ty_expression" }]
+        }
+      ]
+    },
+    "ty_expression": {
+      "patterns": [
+        { "name": "keyword.operator.arrow.granule", "match": "((->)|→)" },
+        { "include": "#parameter_type" },
+        { "include": "#language_const" },
+        { "include": "#operator" },
+        { "include": "#universal" },
+        { "include": "#infix_function" },
+        { "include": "#primitive_type" },
+        { "include": "#coeffect" },
+        { "include": "#effect" },
+        { "include": "#protocol" },
+        { "include": "#delimiter" },
+        { "include": "#number_nat" },
+        { "include": "#number_integer" },
+        { "include": "#number_float" },
+        { "include": "#unit" },
+        { "include": "#string_double" },
+        { "include": "#string_single" },
+        { "include": "#data_ctor" }
+      ]
+    },
+    "function_signature": {
+      "name": "meta.function.type-signature.granule",
+      "begin": "(([\\w']+)|\\(([|!%$+\\-.,=</>:]+)\\))\\s*(:)(?!:)",
+      "beginCaptures": {
+        "2": {
+          "name": "entity.name.function.granule"
+        },
+        "3": {
+          "name": "entity.name.function.granule"
+        },
+        "4": {
+          "name": "keyword.operator.colon.granule"
+        }
+      },
+      "end": "(?!->)",
+      "patterns": [
+        { "include": "#context_signature" },
+        { "include": "#ty_expression" }
+      ]
+    },
+    "language_const": {
+      "patterns": [
+        {
+          "name": "constant.language.unit.granule",
+          "match": "\\(\\)"
+        },
+        {
+          "name": "constant.language.hole.granule",
+          "match": "\\?"
+        },
+        {
+          "name": "constant.language.underscore.granule",
+          "match": "\\b_\\b"
+        }
+      ]
+    },
+    "escape_characters": {
+      "patterns": [
+        {
+          "name": "constant.character.escape.ascii.granule",
+          "match": "\\\\(NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE|DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS|US|SP|DEL|[abfnrtv\\\\\\\"'\\&])"
+        },
+        {
+          "name": "constant.character.escape.octal.granule",
+          "match": "\\\\o[0-7]+|\\\\x[0-9A-Fa-f]+|\\\\[0-9]+"
+        },
+        {
+          "name": "constant.character.escape.control.granule",
+          "match": "\\^[A-Z@\\[\\]\\\\\\^_]"
+        }
+      ]
+    },
+    "data_decl": {
+      "name": "meta.declaration.data.granule",
+      "begin": "\\b(data)\\s",
+      "beginCaptures": {
+        "1": { "name": "keyword.other.granule" }
+      },
+      "end": "\\b(where)\\b|(=)|$",
+      "endCaptures": {
+        "1": { "name": "keyword.other.granule" },
+        "2": { "name": "keyword.operator.granule" }
+      },
+      "patterns": [{ "include": "#ty_expression" }]
+    },
+    "data_ctor": {
+      "patterns": [
+        {
+          "name": "entity.name.function.ctor.granule",
+          "match": "\\b[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*)*\\b"
+        }
+      ]
+    },
+    "primitive_type": {
+      "name": "support.type.primitive.granule",
+      "match": "\\b(Type|Predicate|Int|Float|Char|String|Protocol|Inverse|FloatArray)\\b"
+    },
+    "coeffect": {
+      "name": "support.type.coeffect.granule",
+      "match": "\\b(Semiring|Coeffect|Nat|Q|OOZ|LNL|Zero|One|Many|Level|Private|Public|Irrelevant|Dunno|Sec|Hi|Lo|Uniqueness|Unique|Infinity|Interval|Ext)\\b"
+    },
+    "effect": {
+      "name": "support.type.effect.granule",
+      "match": "\\b(Effect|Session|Com|IO|Open|Read|IOExcept|Close|Exception|Success|MayFail)\\b"
+    },
+    "protocol": {
+      "name": "support.type.protocol.granule",
+      "match": "\\b(Protocol|Send|Recv|End|Chan|LChan|Dual)\\b"
+    },
+    "operator": {
+      "name": "keyword.operator.granule",
+      "match": "\\?[-!#\\$%&\\*\\+\\.\\/<=>@\\\\^|~:]+|[-!#\\$%&\\*\\+\\.\\/<=>@\\\\^|~:\\?][-!#\\$%&\\*\\+\\.\\/<=>@\\\\^|~:×∗⇒←∧∨≤≥≡λ]*"
+    },
+    "universal": {
+      "name": "keyword.operator.universal.granule",
+      "match": "((\\b(forall)\\b)|∀)"
+    },
+    "infix_function": {
+      "name": "keyword.operator.function.infix.granule",
+      "begin": "`",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.entity.granule"
+        }
+      },
+      "end": "`",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.entity.granule"
+        }
+      }
+    },
+    "delimiter": {
+      "name": "punctuation.delimiter.granule",
+      "match": "[\\(\\)\\[\\]{},;]"
+    },
+    "unit": {
+      "match": "\\(\\)",
+      "name": "constant.unit.granule"
+    },
+    "number_nat": {
+      "name": "constant.numeric.granule",
+      "match": "\\b(S|Z)\\b"
+    },
+    "number_integer": {
+      "match": "\\b(([0-9]+|0([xX][0-9a-fA-F]+|[oO][0-7]+))|(Inf)|(∞))\\b",
+      "name": "constant.numeric.granule",
+      "comment": "integer literal"
+    },
+    "number_float": {
+      "match": "\\b([0-9]+\\.[0-9]+([eE][+-]?[0-9]+)?|[0-9]+[eE][+-]?[0-9]+)\\b",
+      "name": "constant.numeric.float.granule",
+      "comment": "float literal"
+    },
+    "string_double": {
+      "name": "string.quoted.double.granule",
+      "begin": "\"",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.granule"
+        }
+      },
+      "end": "\"",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.granule"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#escape_characters"
+        }
+      ]
+    },
+    "string_single": {
+      "name": "string.quoted.single.granule",
+      "match": "(')(?:(?:\\\\\")|(?:\\\\[0-9]+)|(\\\\o[0-7]+)|(\\\\x[0-9a-fA-F]+)|(?:[^'])|(NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE|DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS|US|SP|DEL))(')",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.string.begin.granule"
+        },
+        "2": {
+          "name": "constant.character.escape.octal.granule"
+        },
+        "3": {
+          "name": "constant.character.escape.hexadecimal.granule"
+        },
+        "4": {
+          "name": "constant.character.escape.control.granule"
+        },
+        "5": {
+          "name": "punctuation.definition.string.end.granule"
+        }
+      },
+      "patterns": [
+        {
+          "name": "invalid.illegal.granule",
+          "match": "\\\\n"
+        }
+      ]
+    }
+  }
+}
