@@ -2,6 +2,8 @@ import * as vscode from "vscode";
 import cp = require("child_process");
 import path = require("path");
 
+const vscode_languageclient = require("vscode-languageclient");
+
 export function activate(context: vscode.ExtensionContext) {
   const outputChannel = vscode.window.createOutputChannel("granule");
 
@@ -68,6 +70,27 @@ export function activate(context: vscode.ExtensionContext) {
     asciiToUnicode,
     unicodeToAscii
   );
+
+  var config = vscode.workspace.getConfiguration("granule");
+	
+	var binaryPath = config.get("languageServerPath");
+	if (!binaryPath) {
+		vscode.window.showErrorMessage("Could not start Granule language server due to missing setting: granule.languageServerPath");
+		return;
+	}
+
+	var serverOptions = {
+		command: binaryPath,
+		options: { shell: true },
+	};
+
+	var clientOptions = {
+		documentSelector: [{ scheme: 'file', language: 'granule' }],
+	};
+
+	var client = new vscode_languageclient.LanguageClient("granuleLanguageServer", "Granule language server", serverOptions, clientOptions);
+	client.start();
+
 }
 
 export function deactivate() { }

@@ -1,4 +1,6 @@
 {
+  "type": "object",
+  "title": "Granule",
   "comments": {
     "lineComment": "--"
   },
@@ -21,5 +23,12 @@
     ["\"", "\""],
     ["<", ">"]
   ],
-  "wordPattern": "(\\??[^\\`\\~\\!\\@\\#\\%\\^\\&\\*\\(\\)\\-\\=\\+\\[\\{\\]\\}\\\\\\|\\;\\:\\\"\\,\\<\\>\\/\\?\\s]+)"
+  "wordPattern": "(\\??[^\\`\\~\\!\\@\\#\\%\\^\\&\\*\\(\\)\\-\\=\\+\\[\\{\\]\\}\\\\\\|\\;\\:\\\"\\,\\<\\>\\/\\?\\s]+)",
+  "properties": {
+    "granule.languageServerPath": {
+      "type": "string",
+      "default": "grls",
+      "description": "Path of the Granule language server binary (e.g. \"grls\")"
+    }
+	}
 }
