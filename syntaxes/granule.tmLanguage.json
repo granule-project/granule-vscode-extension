@@ -97,7 +97,8 @@
           "endCaptures": {
             "0": { "name": "punctuation.delimiter.granule" }
           },
-          "patterns": [{ "include": "#parameter_inner" }]
+          "patterns": [{ "include": "#parameter_inner" },
+                       { "include": "#ty_expression" }]
         },
         {
           "name": "meta.parameter.named.granule",
