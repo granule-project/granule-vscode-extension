@@ -1,7 +1,7 @@
 {
   "name": "Granule",
   "scopeName": "source.gr",
-  "fileTypes": ["gr"],
+  "fileTypes": ["gr", "lam"],
   "comment": "Based heavily on the Idris syntax from https://github.com/meraymond2/idris-vscode",
   "patterns": [
     {

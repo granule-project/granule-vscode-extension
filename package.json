@@ -36,11 +36,26 @@
         "extensions": [
           ".gr"
         ]
+      },
+      {
+        "id": "gerty",
+        "aliases": [
+          "Gerty",
+          "gerty"
+        ],
+        "extensions": [
+          ".lam"
+        ]
       }
     ],
     "grammars": [
       {
         "language": "granule",
+        "scopeName": "source.gr",
+        "path": "syntaxes/granule.tmLanguage.json"
+      },
+      {
+        "language": "gerty",
         "scopeName": "source.gr",
         "path": "syntaxes/granule.tmLanguage.json"
       }
