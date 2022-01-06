@@ -23,12 +23,5 @@
     ["\"", "\""],
     ["<", ">"]
   ],
-  "wordPattern": "(\\??[^\\`\\~\\!\\@\\#\\%\\^\\&\\*\\(\\)\\-\\=\\+\\[\\{\\]\\}\\\\\\|\\;\\:\\\"\\,\\<\\>\\/\\?\\s]+)",
-  "properties": {
-    "granule.languageServerPath": {
-      "type": "string",
-      "default": "grls",
-      "description": "Path of the Granule language server binary (e.g. \"grls\")"
-    }
-	}
+  "wordPattern": "(\\??[^\\`\\~\\!\\@\\#\\%\\^\\&\\*\\(\\)\\-\\=\\+\\[\\{\\]\\}\\\\\\|\\;\\:\\\"\\,\\<\\>\\/\\?\\s]+)"
 }

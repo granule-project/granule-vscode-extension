@@ -2,7 +2,7 @@
   "name": "granule",
   "displayName": "Granule",
   "description": "Adds support for the Granule language, including syntax highlighting, snippets, language configuration and various commands.",
-  "publisher": "Granule",
+  "publisher": "granule-project",
   "repository": {
     "type": "git",
     "url": "https://github.com/granule-project/granule-vscode-extension"
@@ -114,7 +114,21 @@
         "language": "granule",
         "path": "./granule-snippets.json"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Granule",
+      "properties": {
+        "granule.languageServerPath": {
+          "type": "string",
+          "default": "grls",
+          "description": "Path of the Granule language server binary (e.g. \"grls\")"
+        },
+        "granule.languageServerArguments": {
+          "type": ["string", "null"],
+          "default": null,
+          "description": "Arguments to be passed to the language server binary"
+     }
+    }}
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile",
