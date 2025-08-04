@@ -1,16 +1,19 @@
 {
   "name": "Granule",
   "scopeName": "source.gr",
-  "fileTypes": ["gr", "lam"],
+  "fileTypes": [
+    "gr",
+    "lam"
+  ],
   "comment": "Based heavily on the Idris syntax from https://github.com/meraymond2/idris-vscode",
   "patterns": [
     {
       "name": "keyword.control.granule",
-      "match": "\\b(if|then|else|do|let|in|where)\\b"
+      "match": "\\b(if|then|else|do|let|in|where|share|clone)\\b"
     },
     {
       "name": "storage.declaration.granule",
-      "match": "\\b(case|of|try|as|catch)\\b"
+      "match": "\\b(case|of|try|as|catch|pack|unpack)\\b"
     },
     {
       "name": "storage.visibility.granule",
@@ -69,10 +72,18 @@
         }
       ]
     },
-    { "include": "#param_decl" },
-    { "include": "#data_decl" },
-    { "include": "#function_signature" },
-    { "include": "#ty_expression" }
+    {
+      "include": "#param_decl"
+    },
+    {
+      "include": "#data_decl"
+    },
+    {
+      "include": "#function_signature"
+    },
+    {
+      "include": "#ty_expression"
+    }
   ],
   "repository": {
     "param_decl": {
@@ -80,11 +91,23 @@
       "begin": "\\b(parameters)\\s+(\\()",
       "end": "(\\))$",
       "beginCaptures": {
-        "1": { "name": "keyword.other.granule" },
-        "2": { "name": "punctuation.context.begin.granule" }
+        "1": {
+          "name": "keyword.other.granule"
+        },
+        "2": {
+          "name": "punctuation.context.begin.granule"
+        }
       },
-      "endCaptures": { "1": { "name": "punctuation.context.end.granule" } },
-      "patterns": [{ "include": "#ty_expression" }]
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.context.end.granule"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#ty_expression"
+        }
+      ]
     },
     "parameter_type": {
       "comment": "Parameter types in a type signature",
@@ -95,25 +118,45 @@
           "begin": "(\\{)(?!\\-)",
           "end": "(?<!\\-)(\\})",
           "endCaptures": {
-            "0": { "name": "punctuation.delimiter.granule" }
+            "0": {
+              "name": "punctuation.delimiter.granule"
+            }
           },
-          "patterns": [{ "include": "#parameter_inner" },
-                       { "include": "#ty_expression" }]
+          "patterns": [
+            {
+              "include": "#parameter_inner"
+            },
+            {
+              "include": "#ty_expression"
+            }
+          ]
         },
         {
           "name": "meta.parameter.named.granule",
           "comment": "(x : Nat)",
           "begin": "((\\()([\\w'\\s]+)\\s*(:)(?!:),?)+",
           "beginCaptures": {
-            "2": { "name": "punctuation.delimiter.granule" },
-            "3": { "name": "variable.parameter.granule" },
-            "4": { "name": "keyword.operator.annot.granule" }
+            "2": {
+              "name": "punctuation.delimiter.granule"
+            },
+            "3": {
+              "name": "variable.parameter.granule"
+            },
+            "4": {
+              "name": "keyword.operator.annot.granule"
+            }
           },
           "end": "\\)",
           "endCaptures": {
-            "0": { "name": "punctuation.delimiter.granule" }
+            "0": {
+              "name": "punctuation.delimiter.granule"
+            }
           },
-          "patterns": [{ "include": "#ty_expression" }]
+          "patterns": [
+            {
+              "include": "#ty_expression"
+            }
+          ]
         }
       ]
     },
@@ -121,35 +164,91 @@
       "comment": "x : Nat",
       "begin": "(([\\w'\\s]+)\\s*(:)(?!:),?)",
       "beginCaptures": {
-        "2": { "name": "variable.parameter.granule" },
-        "3": { "name": "keyword.operator.annot.granule" }
+        "2": {
+          "name": "variable.parameter.granule"
+        },
+        "3": {
+          "name": "keyword.operator.annot.granule"
+        }
       },
       "end": "(,)|(?=\\})|(?=\\))",
       "endCaptures": {
-        "1": { "name": "punctuation.delimiter.granule" }
+        "1": {
+          "name": "punctuation.delimiter.granule"
+        }
       },
-      "patterns": [{ "include": "#ty_expression" }]
+      "patterns": [
+        {
+          "include": "#ty_expression"
+        }
+      ]
     },
     "ty_expression": {
       "patterns": [
-        { "name": "keyword.operator.arrow.granule", "match": "((->)|→)" },
-        { "include": "#parameter_type" },
-        { "include": "#language_const" },
-        { "include": "#operator" },
-        { "include": "#universal" },
-        { "include": "#infix_function" },
-        { "include": "#primitive_type" },
-        { "include": "#coeffect" },
-        { "include": "#effect" },
-        { "include": "#protocol" },
-        { "include": "#delimiter" },
-        { "include": "#number_nat" },
-        { "include": "#number_integer" },
-        { "include": "#number_float" },
-        { "include": "#unit" },
-        { "include": "#string_double" },
-        { "include": "#string_single" },
-        { "include": "#data_ctor" }
+        {
+          "name": "keyword.operator.arrow.granule",
+          "match": "((->)|→)"
+        },
+        {
+          "include": "#parameter_type"
+        },
+        {
+          "include": "#language_const"
+        },
+        {
+          "include": "#operator"
+        },
+        {
+          "include": "#universal"
+        },
+        {
+          "include": "#existential"
+        },
+        {
+          "include": "#infix_function"
+        },
+        {
+          "include": "#primitive_type"
+        },
+        {
+          "include": "#coeffect"
+        },
+        {
+          "include": "#effect"
+        },
+        {
+          "include": "#guarantee"
+        },
+        {
+          "include": "#protocol"
+        },
+        {
+          "include": "#constraint"
+        },
+        {
+          "include": "#delimiter"
+        },
+        {
+          "include": "#number_nat"
+        },
+        {
+          "include": "#number_integer"
+        },
+        {
+          "include": "#number_float"
+        },
+        {
+          "include": "#unit"
+        },
+        {
+          "include": "#string_double"
+        },
+        {
+          "include": "#string_single"
+        },
+        {
+          "include": "#data_ctor"
+        }
       ]
     },
     "function_signature": {
@@ -168,8 +267,12 @@
       },
       "end": "(?!->)",
       "patterns": [
-        { "include": "#context_signature" },
-        { "include": "#ty_expression" }
+        {
+          "include": "#context_signature"
+        },
+        {
+          "include": "#ty_expression"
+        }
       ]
     },
     "language_const": {
@@ -208,14 +311,24 @@
       "name": "meta.declaration.data.granule",
       "begin": "\\b(data)\\s",
       "beginCaptures": {
-        "1": { "name": "keyword.other.granule" }
+        "1": {
+          "name": "keyword.other.granule"
+        }
       },
       "end": "\\b(where)\\b|(=)|$",
       "endCaptures": {
-        "1": { "name": "keyword.other.granule" },
-        "2": { "name": "keyword.operator.granule" }
+        "1": {
+          "name": "keyword.other.granule"
+        },
+        "2": {
+          "name": "keyword.operator.granule"
+        }
       },
-      "patterns": [{ "include": "#ty_expression" }]
+      "patterns": [
+        {
+          "include": "#ty_expression"
+        }
+      ]
     },
     "data_ctor": {
       "patterns": [
@@ -231,23 +344,35 @@
     },
     "coeffect": {
       "name": "support.type.coeffect.granule",
-      "match": "\\b(Semiring|Coeffect|Nat|Q|OOZ|LNL|Zero|One|Many|Level|Private|Public|Irrelevant|Dunno|Sec|Hi|Lo|Uniqueness|Unique|Infinity|Interval|Ext)\\b"
+      "match": "\\b(Semiring|Coeffect|Nat|Q|OOZ|LNL|Zero|One|Many|Level|Private|Public|Irrelevant|Dunno|Sec|Hi|Lo|Infinity|Interval|Ext)\\b"
     },
     "effect": {
       "name": "support.type.effect.granule",
       "match": "\\b(Effect|Session|Com|IO|Open|Read|IOExcept|Close|Exception|Success|MayFail)\\b"
     },
+    "guarantee": {
+      "name": "support.type.guarantee.granule",
+      "match": "\\b(Uniqueness|Unique|Integrity|Trusted)\\b"
+    },
     "protocol": {
       "name": "support.type.protocol.granule",
-      "match": "\\b(Protocol|Send|Recv|End|Chan|LChan|Dual)\\b"
+      "match": "\\b(Protocol|Send|Recv|End|Select|Offer|Chan|LChan|Dual)\\b"
+    },
+    "constraint": {
+      "name": "support.type.constraint.granule",
+      "match": "\\b(Pushable|Dropable|Moveable|ExactSemiring|SingleAction|ReceivePrefix|Sends)\\b"
     },
     "operator": {
       "name": "keyword.operator.granule",
-      "match": "\\?[-!#\\$%&\\*\\+\\.\\/<=>@\\\\^|~:]+|[-!#\\$%&\\*\\+\\.\\/<=>@\\\\^|~:\\?][-!#\\$%&\\*\\+\\.\\/<=>@\\\\^|~:×&⇒←∧∨≤≥≡λ]*|∗"
+      "match": "\\?[-!#\\$%&\\*\\+\\.\\/<=>@\\\\^|~:]+|[-!#\\$%&\\*\\+\\.\\/<=>@\\\\^|~:\\?][-!#\\$%&\\*\\+\\.\\/<=>@\\\\^|~:×&⇒←∧∨≤≥≡λ⨱]*|∗"
     },
     "universal": {
       "name": "keyword.operator.universal.granule",
       "match": "((\\b(forall)\\b)|∀)"
+    },
+    "existential": {
+      "name": "keyword.operator.existential.granule",
+      "match": "((\\b(exists)\\b)|∃)"
     },
     "infix_function": {
       "name": "keyword.operator.function.infix.granule",
